@@ -4,7 +4,7 @@ import { CiImageOn } from "react-icons/ci";
 import { LiaObjectUngroupSolid } from "react-icons/lia";
 import { MdOutlineAudiotrack } from "react-icons/md";
 import { IoMdBody } from "react-icons/io";
-import HomeIcon from "@/components/HomeIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
 
 const Home = () => {
   return (
