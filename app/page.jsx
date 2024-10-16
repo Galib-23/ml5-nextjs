@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className='min-h-screen flex flex-col items-center relative bg-[url("/images/homebg.jpg")] bg-cover bg-center'>
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-60"></div>
 
       <HomeIcon />
       <h1 className="text-2xl md:text-4xl font-semibold mt-4 text-purple-400 z-10 text-center mx-1">
@@ -29,7 +29,7 @@ const Home = () => {
         />
         <HomePageCard
           color="bg-cyan-500"
-          link="/image-classify"
+          link="/object-detection"
           CardIcon={LiaObjectUngroupSolid}
           title="Object Detection"
         />
