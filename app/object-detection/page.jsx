@@ -9,11 +9,15 @@ const ObjectDetection = () => {
   const [model, setModel] = useState(null);
   const [isDetecting, setIsDetecting] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [backend, setBackend] = useState(false);
 
   useEffect(() => {
     const loadModel = async () => {
       setLoading(true);
-      await tf.setBackend("webgl"); // Set TensorFlow.js backend to WebGL for faster performance
+      if(!backend) {
+        const isBackend = await tf.setBackend("webgl");
+        setBackend(isBackend);
+      }
       const loadedModel = await cocoSsd.load();
       setModel(loadedModel);
       setLoading(false);
@@ -30,7 +34,7 @@ const ObjectDetection = () => {
           videoRef.current.onloadedmetadata = () => {
             videoRef.current.play();
             setIsDetecting(true);
-            detectObjects(); // Start detection once the video is ready
+            detectObjects();
           };
         })
         .catch((error) => {
@@ -44,7 +48,7 @@ const ObjectDetection = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    if (video && model && video.readyState === 4) { // Ensure video is fully loaded
+    if (video && model && video.readyState === 4) {
       const predictions = await model.detect(video);
 
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -71,6 +75,7 @@ const ObjectDetection = () => {
     if (videoRef.current && videoRef.current.srcObject) {
       videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
     }
+    window.location.reload();
   };
 
   return (
